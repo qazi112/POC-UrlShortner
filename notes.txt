@@ -1,0 +1,8 @@
+How to shorten the URL,
+
+
+create a simple link e.g 
+
+    localhost:3000/unique_id
+    and based on the unique id return the orignal URL
+    
