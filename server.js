@@ -6,6 +6,9 @@ const Hapi = require("@hapi/hapi");
 
 const { scheme } = require("./utils/auth_scheme");
 
+const authRoutes = require("./routes/auth_route");
+const appRoutes = require("./routes/app_routes");
+
 const init = async () => {
   const server = Hapi.server({
     port: 4000,
@@ -23,28 +26,18 @@ const init = async () => {
   server.auth.strategy("jwt-auth-strategy", "jwt-auth");
 
   // JWT Authorization routes
-  server.route(require("./routes/auth_route"));
+  server.route(authRoutes);
 
   // Application routes
-  server.route(require("./routes/app_routes"));
+  server.route(appRoutes);
 
   await server.start();
-  // server.ext("onPreResponse", (request, h) => {
-  //   return request.response
-  //     .header("Access-Control-Allow-Origin", "*")
-  //     .header(
-  //       "Access-Control-Allow-Methods",
-  //       "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  //     )
-  //     .header("Access-Control-Allow-Headers", "X-Requested-With")
-  //     .header("Access-Control-Allow-Credentials", true);
-  // });
+
   server.ext("onRequest", (request, h) => {
     console.log("onRequest hit!");
     return h.continue;
   });
-  // onPreRequest, onPreAuth etc
-  // server.ext("event", handler){
+
   process.on("uncaughtException", (error) => {
     console.log(error);
   });
