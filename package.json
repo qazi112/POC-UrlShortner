@@ -16,6 +16,8 @@
   "dependencies": {
     "@hapi/boom": "^10.0.0",
     "@hapi/hapi": "^20.2.2",
+    "bcrypt": "^5.0.1",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.7.0",
     "mongoose": "^6.3.8",
